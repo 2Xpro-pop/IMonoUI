@@ -1,12 +1,12 @@
 ﻿using IMonoUI.Primitives;
-using Splat;
+using System.Drawing;
 
 namespace IMonoUI;
 
+// Prefer does not use
 public interface IDrawingContext
 {
-    public void DrawLine(MonoPoint a, MonoPoint b, SplatColor color, float thickness = 1.0f);
-    public void DrawRectangle(RectangleF rect, SplatColor color, float thickness = 1.0f);
-    public void FillRectangle(RectangleF rect, SplatColor color);
-    public void DrawEllipse(RectangleF rect, SplatColor color, float thickness = 1.0f);
+    public void DrawLine(IMonoPen pen, MonoPoint a, MonoPoint b);
+    public void DrawRectangle(IMonoBrush? brush, IMonoPen? pen, MonoRect rect, double radiusX = 0, double radiusY = 0);
+    public void DrawEllipse(IMonoBrush? brush, IMonoPen? pen, MonoPoint center, double radiusX, double radiusY);
 }
