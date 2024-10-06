@@ -4,7 +4,12 @@ using System.Globalization;
 using System.Numerics;
 
 namespace IMonoUI.Primitives;
-public readonly struct MonoSize: IEquatable<MonoSize>
+/// <summary>
+/// Initializes a new instance of the <see cref="MonoSize"/> structure.
+/// </summary>
+/// <param name="width">The width.</param>
+/// <param name="height">The height.</param>
+public readonly struct MonoSize(double width, double height) : IEquatable<MonoSize>
 {
     /// <summary>
     /// <summary>
@@ -15,23 +20,12 @@ public readonly struct MonoSize: IEquatable<MonoSize>
     /// <summary>
     /// The width.
     /// </summary>
-    private readonly double _width;
+    private readonly double _width = width;
 
     /// <summary>
     /// The height.
     /// </summary>
-    private readonly double _height;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MonoSize"/> structure.
-    /// </summary>
-    /// <param name="width">The width.</param>
-    /// <param name="height">The height.</param>
-    public MonoSize(double width, double height)
-    {
-        _width = width;
-        _height = height;
-    }
+    private readonly double _height = height;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MonoSize"/> structure.
@@ -208,13 +202,7 @@ public readonly struct MonoSize: IEquatable<MonoSize>
     /// <returns>The hash code.</returns>
     public override int GetHashCode()
     {
-        unchecked
-        {
-            int hash = 17;
-            hash = (hash * 23) + Width.GetHashCode();
-            hash = (hash * 23) + Height.GetHashCode();
-            return hash;
-        }
+        return HashCode.Combine(Width, Height);
     }
 
     /// <summary>
@@ -265,7 +253,7 @@ public readonly struct MonoSize: IEquatable<MonoSize>
     /// <param name="height">The height.</param>
     public void Deconstruct(out double width, out double height)
     {
-        width = this._width;
-        height = this._height;
+        width = _width;
+        height = _height;
     }
 }

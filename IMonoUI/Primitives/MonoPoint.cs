@@ -266,7 +266,7 @@ public readonly struct MonoPoint : IEquatable<MonoPoint>
     /// <param name="y">The Y coordinate.</param>
     public void Deconstruct(out double x, out double y)
     {
-        x = this._x;
-        y = this._y;
+        x = _x;
+        y = _y;
     }
 }

@@ -238,9 +238,9 @@ public readonly struct MonoThickness : IEquatable<MonoThickness>
     /// <param name="bottom">The thickness on the bottom.</param>
     public void Deconstruct(out double left, out double top, out double right, out double bottom)
     {
-        left = this._left;
-        top = this._top;
-        right = this._right;
-        bottom = this._bottom;
+        left = _left;
+        top = _top;
+        right = _right;
+        bottom = _bottom;
     }
 }

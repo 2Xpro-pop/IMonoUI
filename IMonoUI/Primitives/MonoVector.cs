@@ -4,28 +4,22 @@ using System.Globalization;
 using System.Numerics;
 
 namespace IMonoUI.Primitives;
-public readonly struct MonoVector : IEquatable<MonoVector>
+/// <summary>
+/// Initializes a new instance of the <see cref="MonoVector"/> structure.
+/// </summary>
+/// <param name="x">The X component.</param>
+/// <param name="y">The Y component.</param>
+public readonly struct MonoVector(double x, double y) : IEquatable<MonoVector>
 {
     /// <summary>
     /// The X component.
     /// </summary>
-    private readonly double _x;
+    private readonly double _x = x;
 
     /// <summary>
     /// The Y component.
     /// </summary>
-    private readonly double _y;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="MonoVector"/> structure.
-    /// </summary>
-    /// <param name="x">The X component.</param>
-    /// <param name="y">The Y component.</param>
-    public MonoVector(double x, double y)
-    {
-        _x = x;
-        _y = y;
-    }
+    private readonly double _y = y;
 
     /// <summary>
     /// Gets the X component.
@@ -237,7 +231,7 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="b">The second vector.</param>
     /// <returns>The scaled vector.</returns>
     public static MonoVector Divide(MonoVector a, MonoVector b)
-        => new MonoVector(a._x / b._x, a._y / b._y);
+        => new(a._x / b._x, a._y / b._y);
 
     /// <summary>
     /// Divides the vector by the given scalar.
@@ -246,7 +240,7 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="scalar">The scalar value</param>
     /// <returns>The scaled vector.</returns>
     public static MonoVector Divide(MonoVector vector, double scalar)
-        => new MonoVector(vector._x / scalar, vector._y / scalar);
+        => new(vector._x / scalar, vector._y / scalar);
 
     /// <summary>
     /// Multiplies the first vector by the second.
@@ -255,7 +249,7 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="b">The second vector.</param>
     /// <returns>The scaled vector.</returns>
     public static MonoVector Multiply(MonoVector a, MonoVector b)
-        => new MonoVector(a._x * b._x, a._y * b._y);
+        => new(a._x * b._x, a._y * b._y);
 
     /// <summary>
     /// Multiplies the vector by the given scalar.
@@ -264,7 +258,7 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="scalar">The scalar value</param>
     /// <returns>The scaled vector.</returns>
     public static MonoVector Multiply(MonoVector vector, double scalar)
-        => new MonoVector(vector._x * scalar, vector._y * scalar);
+        => new(vector._x * scalar, vector._y * scalar);
 
     /// <summary>
     /// Adds the second to the first vector
@@ -273,7 +267,7 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="b">The second vector.</param>
     /// <returns>The summed vector.</returns>
     public static MonoVector Add(MonoVector a, MonoVector b)
-        => new MonoVector(a._x + b._x, a._y + b._y);
+        => new(a._x + b._x, a._y + b._y);
 
     /// <summary>
     /// Subtracts the second from the first vector
@@ -282,7 +276,7 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="b">The second vector.</param>
     /// <returns>The difference vector.</returns>
     public static MonoVector Subtract(MonoVector a, MonoVector b)
-        => new MonoVector(a._x - b._x, a._y - b._y);
+        => new(a._x - b._x, a._y - b._y);
 
     /// <summary>
     /// Negates the vector
@@ -290,31 +284,31 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="vector">The vector to negate.</param>
     /// <returns>The scaled vector.</returns>
     public static MonoVector Negate(MonoVector vector)
-        => new MonoVector(-vector._x, -vector._y);
+        => new(-vector._x, -vector._y);
 
     /// <summary>
     /// Returns the vector (0.0, 0.0).
     /// </summary>
     public static MonoVector Zero
-        => new MonoVector(0, 0);
+        => new(0, 0);
 
     /// <summary>
     /// Returns the vector (1.0, 1.0).
     /// </summary>
     public static MonoVector One
-        => new MonoVector(1, 1);
+        => new(1, 1);
 
     /// <summary>
     /// Returns the vector (1.0, 0.0).
     /// </summary>
     public static MonoVector UnitX
-        => new MonoVector(1, 0);
+        => new(1, 0);
 
     /// <summary>
     /// Returns the vector (0.0, 1.0).
     /// </summary>
     public static MonoVector UnitY
-        => new MonoVector(0, 1);
+        => new(0, 1);
 
     /// <summary>
     /// Deconstructs the vector into its X and Y components.
@@ -323,11 +317,11 @@ public readonly struct MonoVector : IEquatable<MonoVector>
     /// <param name="y">The Y component.</param>
     public void Deconstruct(out double x, out double y)
     {
-        x = this._x;
-        y = this._y;
+        x = _x;
+        y = _y;
     }
 
-    internal Vector2 ToVector2() => new Vector2((float)X, (float)Y);
+    internal Vector2 ToVector2() => new((float)X, (float)Y);
 
     internal MonoVector(Vector2 v) : this(v.X, v.Y)
     {
